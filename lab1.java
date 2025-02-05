@@ -7,7 +7,7 @@ public class lab1 {
         // Get user input
         System.out.print("Enter a number: ");
         String input = scanner.nextLine().trim();
-        
+
         System.out.print("Is this a binary or decimal number? (Enter 'binary' or 'decimal'): ");
         String type = scanner.nextLine().trim().toLowerCase();
 
@@ -27,7 +27,7 @@ public class lab1 {
         } else {
             System.out.println("Invalid input type! Please enter 'binary' or 'decimal'.");
         }
-        
+
         scanner.close();
     }
 
@@ -49,5 +49,30 @@ public class lab1 {
             }
         }
         return true;
+    }
+
+    // Thi Huynh
+    public class BinaryToDecimal {
+        public static double binaryToDecimal(String binary) {
+            String[] parts = binary.split("\\."); // Split by decimal point
+            String integerPart = parts[0];
+            String fractionalPart = parts.length > 1 ? parts[1] : "";
+
+            double decimal = 0;
+
+            // Convert integer part
+            for (int i = 0; i < integerPart.length(); i++) {
+                int integerPartPosition = integerPart.length() - i - 1;
+                decimal += Character.getNumericValue(integerPart.charAt(i)) * Math.pow(2, integerPartPosition);
+            }
+
+            // Convert fractional part
+            for (int i = 0; i < fractionalPart.length(); i++) {
+                int fractionalPartPosition = - i - 1;
+                decimal += Character.getNumericValue(fractionalPart.charAt(i)) * Math.pow(2, fractionalPartPosition);
+            }
+
+            return decimal;
+        }
     }
 }
