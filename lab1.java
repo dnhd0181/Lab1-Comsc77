@@ -52,7 +52,6 @@ public class lab1 {
     }
 
     // Thi Huynh
-    public class BinaryToDecimal {
         public static double binaryToDecimal(String binary) {
             String[] parts = binary.split("\\."); // Split by decimal point
             String integerPart = parts[0];
@@ -74,5 +73,4 @@ public class lab1 {
 
             return decimal;
         }
-    }
 }
