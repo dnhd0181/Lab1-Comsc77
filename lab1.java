@@ -52,25 +52,25 @@ public class lab1 {
     }
 
     // Thi Huynh
-        public static double binaryToDecimal(String binary) {
-            String[] parts = binary.split("\\."); // Split by decimal point
-            String integerPart = parts[0];
-            String fractionalPart = parts.length > 1 ? parts[1] : "";
+    public static double binaryToDecimal(String binary) {
+        String[] parts = binary.split("\\."); // Split by decimal point
+        String integerPart = parts[0];
+        String fractionalPart = parts.length > 1 ? parts[1] : "";
 
-            double decimal = 0;
+        double decimal = 0;
 
-            // Convert integer part
-            for (int i = 0; i < integerPart.length(); i++) {
-                int integerPartPosition = integerPart.length() - i - 1;
-                decimal += Character.getNumericValue(integerPart.charAt(i)) * Math.pow(2, integerPartPosition);
-            }
-
-            // Convert fractional part
-            for (int i = 0; i < fractionalPart.length(); i++) {
-                int fractionalPartPosition = - i - 1;
-                decimal += Character.getNumericValue(fractionalPart.charAt(i)) * Math.pow(2, fractionalPartPosition);
-            }
-
-            return decimal;
+        // Convert integer part
+        for (int i = 0; i < integerPart.length(); i++) {
+            int integerPartPosition = integerPart.length() - i - 1;
+            decimal += Character.getNumericValue(integerPart.charAt(i)) * Math.pow(2, integerPartPosition);
         }
+
+        // Convert fractional part
+        for (int i = 0; i < fractionalPart.length(); i++) {
+            int fractionalPartPosition = - i - 1;
+            decimal += Character.getNumericValue(fractionalPart.charAt(i)) * Math.pow(2, fractionalPartPosition);
+        }
+
+        return decimal;
+    }
 }
