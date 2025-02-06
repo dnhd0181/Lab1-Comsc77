@@ -74,4 +74,15 @@ public class lab1 {
         return decimal;
     }
 }
-
+   // Huy Nguyen 
+   
+   // Convert decimal to octal using division method
+    public static String decimalToOctal(int n) {
+        if (n == 0) return "0";
+        StringBuilder octal = new StringBuilder();
+        while (n > 0) {
+            octal.insert(0, n % 8);
+            n /= 8;
+        }
+        return octal.toString();
+    }
