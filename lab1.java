@@ -74,3 +74,4 @@ public class lab1 {
         return decimal;
     }
 }
+
