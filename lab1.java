@@ -119,3 +119,30 @@ public class lab1 {
         }
         return octal.toString();
     }
+//Dang Doan
+private static String decimalToBinary(double decimal) {
+        if (decimal == 0) return "0";
+        
+        long integerPart = (long) decimal;
+        double fractionalPart = decimal - integerPart;
+        
+        StringBuilder binary = new StringBuilder();
+        while (integerPart > 0) {
+            binary.insert(0, integerPart % 2);
+            integerPart /= 2;
+        }
+        
+        if (fractionalPart > 0) {
+            binary.append(".");
+            int precision = 10; // Limit the number of binary places
+            while (fractionalPart > 0 && precision > 0) {
+                fractionalPart *= 2;
+                int bit = (int) fractionalPart;
+                binary.append(bit);
+                fractionalPart -= bit;
+                precision--;
+            }
+        }
+        
+        return binary.toString();
+    }
