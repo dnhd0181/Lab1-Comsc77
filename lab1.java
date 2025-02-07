@@ -73,9 +73,42 @@ public class lab1 {
 
         return decimal;
     }
+
+    // Thi Huynh
+    public static String decimalToHexadecimal(double decimal) {
+        int integerPart = (int) Math.floor(decimal);
+        double fractionalPart = decimal - integerPart;
+
+        String hexadecimal = "";
+
+        // Convert the integer part
+        while (integerPart > 0) {
+            int digit = integerPart % 16;
+            hexadecimal = (digit < 10 ? digit : (char) (55 + digit)) + hexadecimal;
+            integerPart /= 16;
+        }
+
+        if (hexadecimal.isEmpty()) {
+            hexadecimal = "0"; // If no integer part, assign "0"
+        }
+
+        if (fractionalPart > 0) {
+            hexadecimal += ".";
+            // Convert the fractional part
+            while (fractionalPart > 0) {
+                fractionalPart *= 16;
+                int digit = (int) Math.floor(fractionalPart);
+                hexadecimal += (digit < 10 ? digit : (char) (55 + digit));
+                fractionalPart -= digit;
+                if (hexadecimal.length() > 10) break; // Limit the precision to avoid infinite loops
+            }
+        }
+
+        return hexadecimal;
+    }
 }
-   // Huy Nguyen 
-   
+   // Huy Nguyen
+
    // Convert decimal to octal using division method
     public static String decimalToOctal(int n) {
         if (n == 0) return "0";
