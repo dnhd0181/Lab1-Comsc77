@@ -5,6 +5,7 @@ public class lab1 {
         Scanner scanner = new Scanner(System.in);
 
         // Get user input
+        // Dang Doan
         System.out.print("Enter a number: ");
         String input = scanner.nextLine().trim();
 
@@ -12,17 +13,26 @@ public class lab1 {
         String type = scanner.nextLine().trim().toLowerCase();
 
         // Validate input
+        //Dang Doan
         if (type.equals("binary")) {
             if (!isBinary(input)) {
                 System.out.println("Invalid binary number!");
             } else {
                 System.out.println("Valid binary number.");
+                double decimal = binaryToDecimal(input);
+                System.out.println("Decimal: " + decimal);
+                System.out.println("Hexadecimal: " + decimalToHexadecimal(decimal));
+                System.out.println("Octal: " + decimalToOctal((int) decimal));
             }
         } else if (type.equals("decimal")) {
             if (!isDecimal(input)) {
                 System.out.println("Invalid decimal number!");
             } else {
                 System.out.println("Valid decimal number.");
+                double decimal = Double.parseDouble(input);
+                System.out.println("Binary: " + decimalToBinary(decimal));
+                System.out.println("Hexadecimal: " + decimalToHexadecimal(decimal));
+                System.out.println("Octal: " + decimalToOctal((int) decimal));
             }
         } else {
             System.out.println("Invalid input type! Please enter 'binary' or 'decimal'.");
@@ -31,7 +41,8 @@ public class lab1 {
         scanner.close();
     }
 
-    //Dang Doan
+    // Dang Doan 
+    // Binary checking by splitting input
     private static boolean isBinary(String input) {
         for (char c : input.toCharArray()) {
             if (c != '0' && c != '1') {
@@ -41,10 +52,14 @@ public class lab1 {
         return true;
     }
 
-    //Dang Doan
+    // Dang Doan
+    // Decimal checking by splitting input
     private static boolean isDecimal(String input) {
+        boolean hasDecimalPoint = false;
         for (char c : input.toCharArray()) {
-            if (c < '0' || c > '9') {
+            if (c == '.' && !hasDecimalPoint) {
+                hasDecimalPoint = true;
+            } else if (c < '0' || c > '9') {
                 return false;
             }
         }
@@ -67,7 +82,7 @@ public class lab1 {
 
         // Convert fractional part
         for (int i = 0; i < fractionalPart.length(); i++) {
-            int fractionalPartPosition = - i - 1;
+            int fractionalPartPosition = -i - 1;
             decimal += Character.getNumericValue(fractionalPart.charAt(i)) * Math.pow(2, fractionalPartPosition);
         }
 
@@ -79,37 +94,37 @@ public class lab1 {
         int integerPart = (int) Math.floor(decimal);
         double fractionalPart = decimal - integerPart;
 
-        String hexadecimal = "";
+        StringBuilder hexadecimal = new StringBuilder();
 
         // Convert the integer part
         while (integerPart > 0) {
             int digit = integerPart % 16;
-            hexadecimal = (digit < 10 ? digit : (char) (55 + digit)) + hexadecimal;
+            hexadecimal.insert(0, digit < 10 ? digit : (char) (55 + digit));
             integerPart /= 16;
         }
 
-        if (hexadecimal.isEmpty()) {
-            hexadecimal = "0"; // If no integer part, assign "0"
+        if (hexadecimal.length() == 0) {
+            hexadecimal.append("0"); // If no integer part, assign "0"
         }
 
         if (fractionalPart > 0) {
-            hexadecimal += ".";
+            hexadecimal.append(".");
             // Convert the fractional part
-            while (fractionalPart > 0) {
+            int precision = 10; // Limit the precision
+            while (fractionalPart > 0 && precision > 0) {
                 fractionalPart *= 16;
                 int digit = (int) Math.floor(fractionalPart);
-                hexadecimal += (digit < 10 ? digit : (char) (55 + digit));
+                hexadecimal.append(digit < 10 ? digit : (char) (55 + digit));
                 fractionalPart -= digit;
-                if (hexadecimal.length() > 10) break; // Limit the precision to avoid infinite loops
+                precision--;
             }
         }
 
-        return hexadecimal;
+        return hexadecimal.toString();
     }
-}
-   // Huy Nguyen
 
-   // Convert decimal to octal using division method
+    // Huy Nguyen
+    // Convert decimal to octal using division method
     public static String decimalToOctal(int n) {
         if (n == 0) return "0";
         StringBuilder octal = new StringBuilder();
@@ -119,19 +134,20 @@ public class lab1 {
         }
         return octal.toString();
     }
-//Dang Doan
-private static String decimalToBinary(double decimal) {
+
+    // Dang Doan
+    private static String decimalToBinary(double decimal) {
         if (decimal == 0) return "0";
-        
+
         long integerPart = (long) decimal;
         double fractionalPart = decimal - integerPart;
-        
+
         StringBuilder binary = new StringBuilder();
         while (integerPart > 0) {
             binary.insert(0, integerPart % 2);
             integerPart /= 2;
         }
-        
+
         if (fractionalPart > 0) {
             binary.append(".");
             int precision = 10; // Limit the number of binary places
@@ -143,6 +159,7 @@ private static String decimalToBinary(double decimal) {
                 precision--;
             }
         }
-        
+
         return binary.toString();
     }
+}
