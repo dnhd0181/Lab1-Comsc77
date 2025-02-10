@@ -43,9 +43,12 @@ public class lab1 {
 
     // Dang Doan 
     // Binary checking by splitting input
-    private static boolean isBinary(String input) {
+   private static boolean isBinary(String input) {
+        boolean hasDecimalPoint = false;
         for (char c : input.toCharArray()) {
-            if (c != '0' && c != '1' && c!='.') {
+            if (c == '.' && !hasDecimalPoint) {
+                hasDecimalPoint = true;
+            } else if (c != '0' && c != '1') {
                 return false;
             }
         }
