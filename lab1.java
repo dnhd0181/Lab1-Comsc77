@@ -45,7 +45,7 @@ public class lab1 {
     // Binary checking by splitting input
     private static boolean isBinary(String input) {
         for (char c : input.toCharArray()) {
-            if (c != '0' && c != '1') {
+            if (c != '0' && c != '1' && c!='.') {
                 return false;
             }
         }
