@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class lab1 {
+public class Lab1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -38,10 +38,30 @@ public class lab1 {
             System.out.println("Invalid input type! Please enter 'binary' or 'decimal'.");
         }
 
-        scanner.close();
+        // scanner.close();
+        System.out.println("----------------------------------");
+
+        // Thi Huynh
+        // Examples of conversion from binary to decimal
+        System.out.println(binaryToDecimal("1101")); // Expected: 13.0
+        System.out.println(binaryToDecimal("100111100")); // Expected: 316.0
+        System.out.println(binaryToDecimal("0.011")); // Expected: 0.375
+        System.out.println(binaryToDecimal("101.101")); // Expected: 5.625
+
+        // Examples of conversion from decimal to binary
+        System.out.println(decimalToBinary(108342)); // Expected: "11010011111110110"
+        System.out.println(decimalToBinary(993464)); // Expected: "11110010010001101000"
+        System.out.println(decimalToBinary(122.51)); // Expected: "1111010.10000001111010111"
+        System.out.println(decimalToBinary(5477.89)); // Expected: "1010101100101.1110000001100110"
+
+        // Examples that produces an error due to an invalid input/an illegal character
+        System.out.println(binaryToDecimal("110095110"));
+        System.out.println(binaryToDecimal("10001F"));
+        System.out.println(decimalToBinary("185FF99"));
+        System.out.println(decimalToBinary("123B777"));
     }
 
-    // Dang Doan 
+    // Dang Doan
     // Binary checking by splitting input
     private static boolean isBinary(String input) {
         for (char c : input.toCharArray()) {
