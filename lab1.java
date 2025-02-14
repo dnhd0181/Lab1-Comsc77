@@ -93,38 +93,43 @@ public class lab1 {
     }
 
     // Thi Huynh
+   // Thi Huynh
     public static String decimalToHexadecimal(double decimal) {
-        int integerPart = (int) Math.floor(decimal);
-        double fractionalPart = decimal - integerPart;
+    if (decimal == 0) return "0"; // Handle case when decimal is zero
 
-        StringBuilder hexadecimal = new StringBuilder();
+    // Handle integer part
+    long integerPart = (long) decimal;
+    double fractionalPart = decimal - integerPart;
+    
+    StringBuilder hexadecimal = new StringBuilder();
 
-        // Convert the integer part
+    // Convert integer part
+    if (integerPart == 0) {
+        hexadecimal.append("0");
+    } else {
         while (integerPart > 0) {
-            int digit = integerPart % 16;
-            hexadecimal.insert(0, digit < 10 ? digit : (char) (55 + digit));
+            int digit = (int) (integerPart % 16);
+            hexadecimal.insert(0, digit < 10 ? (char) ('0' + digit) : (char) ('A' + digit - 10));
             integerPart /= 16;
         }
-
-        if (hexadecimal.length() == 0) {
-            hexadecimal.append("0"); // If no integer part, assign "0"
-        }
-
-        if (fractionalPart > 0) {
-            hexadecimal.append(".");
-            // Convert the fractional part
-            int precision = 10; // Limit the precision
-            while (fractionalPart > 0 && precision > 0) {
-                fractionalPart *= 16;
-                int digit = (int) Math.floor(fractionalPart);
-                hexadecimal.append(digit < 10 ? digit : (char) (55 + digit));
-                fractionalPart -= digit;
-                precision--;
-            }
-        }
-
-        return hexadecimal.toString();
     }
+
+    // Convert fractional part (limit to 3 digits)
+    if (fractionalPart > 0) {
+        hexadecimal.append(".");
+        int precision = 3; // Limit to 3 places
+
+        while (fractionalPart > 0 && precision > 0) {
+            fractionalPart *= 16;
+            int digit = (int) fractionalPart;
+            hexadecimal.append(digit < 10 ? (char) ('0' + digit) : (char) ('A' + digit - 10));
+            fractionalPart -= digit;
+            precision--;
+        }
+    }
+
+    return hexadecimal.toString();
+}
 
     // Huy Nguyen
     // Convert decimal to octal using division method
